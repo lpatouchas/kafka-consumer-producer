@@ -1,4 +1,4 @@
-package eu.iri.ace.kafka.client;
+package gr.patouchas.kafka.client;
 
 import java.util.Properties;
 

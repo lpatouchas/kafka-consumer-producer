@@ -1,4 +1,4 @@
-package eu.iri.ace.kafka.deprecated;
+package gr.patouchas.kafka.deprecated;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
