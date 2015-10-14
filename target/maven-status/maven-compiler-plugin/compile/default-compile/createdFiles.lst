@@ -1,0 +1,6 @@
+eu\iri\ace\kafka\client\Producer.class
+eu\iri\ace\kafka\client\Consumer.class
+eu\iri\ace\kafka\deprecated\DepConsumer.class
+eu\iri\ace\kafka\deprecated\SimpleExample.class
+eu\iri\ace\kafka\client\KProducer.class
+eu\iri\ace\kafka\client\Main.class
