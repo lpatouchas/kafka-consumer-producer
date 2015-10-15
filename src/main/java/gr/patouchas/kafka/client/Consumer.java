@@ -17,19 +17,22 @@ public class Consumer implements Runnable {
 	private final String topic;
 	final Properties props = new Properties();
 	final String group;
+	final String consumerName;
 
-	public Consumer(final String topic, final String group) {
+	public Consumer(final String topic, final String group, final String name) {
 
 		this.props.put("zookeeper.connect", "localhost:2181"); // Configure ZooKeeper location
 		this.props.put("group.id", group); // Configure consumer group
 		this.props.put("zookeeper.session.timeout.ms", "400");
 		this.props.put("zookeeper.sync.time.ms", "200");
-		// this.props.put("auto.commit.enable", "false");
+		this.props.put("auto.commit.enable", "false");
 		this.props.put("consumer.timeout.ms", "1000");
 		// this.props.put("auto.commit.interval.ms", "1000");
-		// this.props.put("autooffset.reset", "smallest");
+		// if you create a new group with this it will consume from the beginning
+		// this.props.put("auto.offset.reset", "smallest");
 		this.topic = topic;
 		this.group = group;
+		this.consumerName = name;
 	}
 
 	@Override
@@ -61,8 +64,9 @@ public class Consumer implements Runnable {
 			final String value = messageAndMetadata.message();
 			final Long offset = messageAndMetadata.offset();
 
-			System.out.println("group.id: " + this.group + ", Key is \"" + key + "\" value is \"" + value + "\", offset: " + offset);
-			// consumerConnector.commitOffsets();
+			System.out.println(this.consumerName + ", group.id: " + this.group + ", Key is \"" + key + "\" value is \"" + value + "\", offset: "
+							+ offset);
+			consumerConnector.commitOffsets();
 		}
 		try {
 			Thread.sleep(1000);
